@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MvcLab.Factory;
+using MvcLab.NetTool;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -9,8 +11,9 @@ namespace MvcLab.Models
 {
     public class SimpleWeatherService
     {
-        static readonly HttpClient httpClient = new HttpClient();
         private readonly IConfiguration _configuration;
+        //private readonly ICallAPI _callAPI;
+        private ICallAPI _callAPI { get { return CallAPIFactory.Generate(); } }
         public class WeatherData
         {
             public string Status { get; set; }
@@ -26,7 +29,7 @@ namespace MvcLab.Models
         public WeatherData GetTaipeiWeatherFromOpenDataApi()
         {
             //TODO 應改為 async/await
-            var json = httpClient.GetAsync(_configuration["openDataApiUrl"]).Result.Content.ReadAsStringAsync().Result;
+            var json = _callAPI.Get(_configuration["openDataApiUrl"]);
             //https://blog.darkthread.net/blog/httpclient-sigleton/
             using (var doc = JsonDocument.Parse(json,
                 new JsonDocumentOptions { AllowTrailingCommas = true }))
