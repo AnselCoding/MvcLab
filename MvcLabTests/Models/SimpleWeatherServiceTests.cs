@@ -3,6 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MvcLab.Factory;
 using MvcLab.NetTool;
 using NSubstitute;
+using FluentAssertions;
+using static MvcLab.Models.SimpleWeatherService;
 
 namespace MvcLab.Models.Tests
 {
@@ -34,13 +36,19 @@ namespace MvcLab.Models.Tests
             CallAPIFactory.callAPIMoke = NsubCallAPIMoke;
             var svc = new SimpleWeatherService(config);
 
+            var expected = new WeatherData
+            {
+                Status = "多雲",
+                MaxTemp = "32",
+                MinTemp = "30"
+            };
 
             /// act
-            var data = svc.GetTaipeiWeatherFromOpenDataApi();
+            var actual = svc.GetTaipeiWeatherFromOpenDataApi();
 
             /// assert
-            // check weather data is not null
-            Assert.IsNotNull(data);
+            //Assert.AreEqual(expected, actual);
+            actual.Should().BeEquivalentTo(expected);
         }
     }
 }
