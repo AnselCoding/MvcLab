@@ -12,7 +12,7 @@ namespace MvcLab.Models.Tests
     public class SimpleWeatherServiceTests
     {
         [TestMethod()]
-        public void GetTaipeiWeatherFromOpenDataApiTest_IsNotNull()
+        public void GetTaipeiWeatherFromOpenDataApiTest_EquivalentToExpectedDTO()
         {
             /// arrange
             // get config data from appsettings.json
@@ -36,6 +36,7 @@ namespace MvcLab.Models.Tests
             CallAPIFactory.callAPIMoke = NsubCallAPIMoke;
             var svc = new SimpleWeatherService(config);
 
+            // create expected DTO
             var expected = new WeatherData
             {
                 Status = "多雲",
