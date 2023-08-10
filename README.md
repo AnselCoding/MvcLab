@@ -1,5 +1,6 @@
 # Practice .NET 6 MVC
 * ViewComponent
 * SRP
-* CI
-* Test(with NSubstitute and FluentAssertions)
+* CI/CD (GitHub Action)
+* Test (with NSubstitute and FluentAssertions)
+* Docker

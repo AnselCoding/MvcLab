@@ -16,6 +16,7 @@ namespace MvcLab.Models
         private ICallAPI _callAPI { get { return CallAPIFactory.Generate(); } }
         public class WeatherData
         {
+            public string ZoneName { get; set; }
             public string Status { get; set; }
             public string MaxTemp { get; set; }
             public string MinTemp { get; set; }
@@ -30,7 +31,6 @@ namespace MvcLab.Models
         {
             //TODO 應改為 async/await
             var json = _callAPI.Get(_configuration["openDataApiUrl"]);
-            //https://blog.darkthread.net/blog/httpclient-sigleton/
             using (var doc = JsonDocument.Parse(json,
                 new JsonDocumentOptions { AllowTrailingCommas = true }))
             {
@@ -51,6 +51,38 @@ namespace MvcLab.Models
 
                 return new WeatherData
                 {
+                    Status = readParameterName("Wx"),
+                    MaxTemp = readParameterName("MaxT"),
+                    MinTemp = readParameterName("MinT")
+                };
+            }
+        }
+
+        public WeatherData GetWeatherFromOpenDataApi(string zoneName)
+        {
+            var json = _callAPI.Get(_configuration["openDataApiUrl"]);
+            using (var doc = JsonDocument.Parse(json,
+                new JsonDocumentOptions { AllowTrailingCommas = true }))
+            {
+                var taipeiData = doc
+                    .RootElement
+                    .GetProperty("records")
+                    .GetProperty("location")
+                    .EnumerateArray()
+                    //TODO: 省略比對不到縣市名稱之錯誤處理
+                    .Single(o => o.GetProperty("locationName").GetString() == zoneName)
+                    .GetProperty("weatherElement")
+                    .EnumerateArray();
+
+                Func<string, string> readParameterName =
+                    (elemName) =>
+                    taipeiData.Single(o => o.GetProperty("elementName").GetString() == elemName)
+                        .GetProperty("time").EnumerateArray().First()
+                        .GetProperty("parameter").GetProperty("parameterName").GetString();
+
+                return new WeatherData
+                {
+                    ZoneName = zoneName,
                     Status = readParameterName("Wx"),
                     MaxTemp = readParameterName("MaxT"),
                     MinTemp = readParameterName("MinT")
