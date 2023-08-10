@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  mvclab:
+    image: ${DOCKER_REGISTRY-}mvclab
+    build:
+      context: .
+      dockerfile: MvcLab/Dockerfile

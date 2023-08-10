@@ -5,7 +5,9 @@ VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcLab", "MvcLab\MvcLab.csproj", "{D6EBB04F-5D67-4853-A8A1-7D0B4CA6638A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcLabTests", "MvcLabTests\MvcLabTests.csproj", "{6F4168D0-CF51-485E-BB51-4815335E1077}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcLabTests", "MvcLabTests\MvcLabTests.csproj", "{6F4168D0-CF51-485E-BB51-4815335E1077}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{D6A60159-EF2C-43CB-9885-D3E153ACE5C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{6F4168D0-CF51-485E-BB51-4815335E1077}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F4168D0-CF51-485E-BB51-4815335E1077}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F4168D0-CF51-485E-BB51-4815335E1077}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6A60159-EF2C-43CB-9885-D3E153ACE5C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6A60159-EF2C-43CB-9885-D3E153ACE5C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6A60159-EF2C-43CB-9885-D3E153ACE5C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6A60159-EF2C-43CB-9885-D3E153ACE5C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

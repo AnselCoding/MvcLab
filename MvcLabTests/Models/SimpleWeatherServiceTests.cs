@@ -39,7 +39,7 @@ namespace MvcLab.Models.Tests
             // create expected DTO
             var expected = new WeatherData
             {
-                Status = "多雲_take2",
+                Status = "多雲",
                 MaxTemp = "32",
                 MinTemp = "30"
             };
