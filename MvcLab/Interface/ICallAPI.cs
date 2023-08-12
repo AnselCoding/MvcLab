@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using System.Net.Http;
 
-namespace MvcLab.NetTool
+namespace MvcLab.Interface
 {
     public interface ICallAPI
     {
-        public string Get(string URL);
+        public Task<string> Get(string URL);
     }
 }

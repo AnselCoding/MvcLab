@@ -1,4 +1,5 @@
-﻿using MvcLab.NetTool;
+﻿using MvcLab.Interface;
+using MvcLab.NetTool;
 
 namespace MvcLab.Factory
 {

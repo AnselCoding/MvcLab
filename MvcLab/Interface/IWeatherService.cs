@@ -4,6 +4,10 @@ namespace MvcLab.Interface
 {
     public interface IWeatherService
     {
-        WeatherData GetWeatherFromOpenDataApi(string zoneName);
+        //同步作法
+        //WeatherData GetWeatherFromOpenDataApi(string zoneName);
+
+        //非同步作法
+        Task<WeatherData> GetWeatherFromOpenDataApi(string zoneName);
     }
 }

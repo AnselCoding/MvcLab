@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MvcLab.Factory;
-using MvcLab.NetTool;
 using NSubstitute;
 using FluentAssertions;
-using MvcLab.Services;
+using MvcLab.Interface;
+using MvcLab.Models;
 
-namespace MvcLab.Models.Tests
+namespace MvcLab.Services.Tests
 {
     [TestClass()]
     public class SimpleWeatherServiceTests
@@ -53,8 +53,12 @@ namespace MvcLab.Models.Tests
         //    actual.Should().BeEquivalentTo(expected);
         //}
 
+        /// <summary>
+        /// ViewComponents Test2
+        /// </summary>
+        /// <returns></returns>
         [TestMethod()]
-        public void GetWeatherFromOpenDataApiTest_EquivalentToExpectedDTO()
+        public async Task GetWeatherFromOpenDataApiTest_EquivalentToExpectedDTO()
         {
             /// arrange
             // get config data from appsettings.json
@@ -71,7 +75,7 @@ namespace MvcLab.Models.Tests
             // create moke of callAPI
             var NsubCallAPIMoke = Substitute.For<ICallAPI>();
             // setup Get method
-            NsubCallAPIMoke.Get(URL).
+           NsubCallAPIMoke.Get(URL).
                 Returns(sb.ToString());
 
             // create SimpleWeatherService object
@@ -88,7 +92,7 @@ namespace MvcLab.Models.Tests
             };
 
             /// act
-            var actual = svc.GetWeatherFromOpenDataApi("臺北市");
+            var actual = await svc.GetWeatherFromOpenDataApi("臺北市");
 
             /// assert
             actual.Should().BeEquivalentTo(expected);

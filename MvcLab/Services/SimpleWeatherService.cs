@@ -1,7 +1,6 @@
 ﻿using MvcLab.Factory;
 using MvcLab.Interface;
 using MvcLab.Models;
-using MvcLab.NetTool;
 using System.Text.Json;
 
 namespace MvcLab.Services
@@ -16,7 +15,7 @@ namespace MvcLab.Services
             _configuration = configuration;
         }
 
-        //ViewComponents Test1
+        #region ViewComponents Test1
         //public WeatherData GetTaipeiWeatherFromOpenDataApi()
         //{
         //    //TODO 應改為 async/await
@@ -47,11 +46,46 @@ namespace MvcLab.Services
         //        };
         //    }
         //}
+        #endregion
 
-        //ViewComponents Test2
-        public WeatherData GetWeatherFromOpenDataApi(string zoneName)
+        #region ViewComponents Test2 同步
+        //public WeatherData GetWeatherFromOpenDataApi(string zoneName)
+        //{
+        //    var json = _callAPI.Get(_configuration["openDataApiUrl"]);
+        //    using (var doc = JsonDocument.Parse(json,
+        //        new JsonDocumentOptions { AllowTrailingCommas = true }))
+        //    {
+        //        var taipeiData = doc
+        //            .RootElement
+        //            .GetProperty("records")
+        //            .GetProperty("location")
+        //            .EnumerateArray()
+        //            //TODO: 省略比對不到縣市名稱之錯誤處理
+        //            .Single(o => o.GetProperty("locationName").GetString() == zoneName)
+        //            .GetProperty("weatherElement")
+        //            .EnumerateArray();
+
+        //        Func<string, string> readParameterName =
+        //            (elemName) =>
+        //            taipeiData.Single(o => o.GetProperty("elementName").GetString() == elemName)
+        //                .GetProperty("time").EnumerateArray().First()
+        //                .GetProperty("parameter").GetProperty("parameterName").GetString();
+
+        //        return new WeatherData
+        //        {
+        //            ZoneName = zoneName,
+        //            Status = readParameterName("Wx"),
+        //            MaxTemp = readParameterName("MaxT"),
+        //            MinTemp = readParameterName("MinT")
+        //        };
+        //    }
+        //}
+        #endregion
+
+        //ViewComponents Test2 非同步
+        public async Task<WeatherData> GetWeatherFromOpenDataApi(string zoneName)
         {
-            var json = _callAPI.Get(_configuration["openDataApiUrl"]);
+            var json = await _callAPI.Get(_configuration["openDataApiUrl"]);
             using (var doc = JsonDocument.Parse(json,
                 new JsonDocumentOptions { AllowTrailingCommas = true }))
             {
