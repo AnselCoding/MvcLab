@@ -1,11 +1,10 @@
-﻿using MvcLab.Models;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MvcLab.Factory;
 using MvcLab.NetTool;
 using NSubstitute;
 using FluentAssertions;
-using static MvcLab.Models.SimpleWeatherService;
+using MvcLab.Services;
 
 namespace MvcLab.Models.Tests
 {

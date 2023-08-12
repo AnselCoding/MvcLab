@@ -1,26 +1,15 @@
 ﻿using MvcLab.Factory;
+using MvcLab.Interface;
+using MvcLab.Models;
 using MvcLab.NetTool;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading.Tasks;
 
-namespace MvcLab.Models
+namespace MvcLab.Services
 {
-    public class SimpleWeatherService
+    public class SimpleWeatherService : IWeatherService
     {
         private readonly IConfiguration _configuration;
-        //private readonly ICallAPI _callAPI;
         private ICallAPI _callAPI { get { return CallAPIFactory.Generate(); } }
-        public class WeatherData
-        {
-            public string ZoneName { get; set; }
-            public string Status { get; set; }
-            public string MaxTemp { get; set; }
-            public string MinTemp { get; set; }
-        }
 
         public SimpleWeatherService(IConfiguration configuration)
         {

@@ -1,20 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using MvcLab.Models;
+using MvcLab.Interface;
 
 namespace MvcLab.ViewComponents
 {
     public class WeatherBlockViewComponent : ViewComponent
     {
-        private readonly IConfiguration _configuration;
-        public WeatherBlockViewComponent(IConfiguration configuration)
+        private readonly IWeatherService _weatherService;
+        public WeatherBlockViewComponent(IWeatherService weatherService)
         {
-            _configuration = configuration;
+            _weatherService = weatherService;
         }
         public IViewComponentResult Invoke(string zoneName)
         {
-            var svc = new SimpleWeatherService(_configuration);
-            var data = svc.GetWeatherFromOpenDataApi(zoneName);
+            var data = _weatherService.GetWeatherFromOpenDataApi(zoneName);
             return View(data);
         }
     }
