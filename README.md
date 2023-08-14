@@ -4,3 +4,5 @@
 * CI/CD (GitHub Action)
 * Test (with NSubstitute and FluentAssertions)
 * Docker
+* DI
+* async/await
